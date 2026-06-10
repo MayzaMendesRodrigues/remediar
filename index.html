@@ -1,0 +1,1385 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remediar — Doação Inteligente de Medicamentos</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,300;0,700;1,300;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --teal: #4db6ac;
+        --teal-dark: #2e8b84;
+        --teal-deeper: #1a6b65;
+        --teal-light: #e0f5f3;
+        --teal-mid: #b2dfdb;
+        --off-white: #f7fafa;
+        --ink: #0f2422;
+        --ink-soft: #2c4a47;
+        --ink-muted: #5a7874;
+        --coral: #e05a4e;
+        --coral-light: #fef3f2;
+        --white: #ffffff;
+        --border: #c8e6e3;
+        --font-display: "Fraunces", Georgia, serif;
+        --font-body: "Inter", system-ui, sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--font-body);
+        background: var(--off-white);
+        color: var(--ink);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 48px;
+        background: rgba(247, 250, 250, 0.94);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--teal-dark);
+        text-decoration: none;
+      }
+      .nav-logo img {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+      }
+      .nav-cta {
+        background: var(--teal);
+        color: var(--white);
+        border: none;
+        border-radius: 8px;
+        padding: 10px 24px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: var(--font-body);
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .nav-cta:hover {
+        background: var(--teal-dark);
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        gap: 0;
+        padding: 100px 48px 80px;
+        background: linear-gradient(
+          135deg,
+          var(--teal-deeper) 0%,
+          var(--teal-dark) 55%,
+          var(--teal) 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at 65% 40%,
+          rgba(255, 255, 255, 0.05) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+      .hero-left {
+        position: relative;
+        z-index: 2;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal-light);
+        opacity: 0.75;
+        margin-bottom: 20px;
+      }
+      .hero-eyebrow span {
+        width: 24px;
+        height: 1px;
+        background: var(--teal-light);
+        opacity: 0.5;
+      }
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(34px, 3.8vw, 56px);
+        font-weight: 700;
+        line-height: 1.1;
+        color: var(--white);
+        margin-bottom: 24px;
+      }
+      .hero-title em {
+        font-style: italic;
+        color: var(--teal-light);
+      }
+      .hero-sub {
+        font-size: 17px;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.75);
+        max-width: 480px;
+        margin-bottom: 40px;
+      }
+      .hero-sub strong {
+        color: var(--white);
+      }
+      .hero-btns {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .btn-white {
+        background: var(--white);
+        color: var(--teal-dark);
+        border: none;
+        border-radius: 10px;
+        padding: 14px 32px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: var(--font-body);
+        text-decoration: none;
+        display: inline-block;
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .btn-white:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--white);
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        border-radius: 10px;
+        padding: 14px 32px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+        font-family: var(--font-body);
+        text-decoration: none;
+        display: inline-block;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .btn-ghost:hover {
+        border-color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .hero-right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+      }
+      .phone-wrap {
+        position: relative;
+      }
+      .phone-glow {
+        position: absolute;
+        inset: -40px;
+        background: radial-gradient(
+          ellipse,
+          rgba(77, 182, 172, 0.25) 0%,
+          transparent 70%
+        );
+        z-index: -1;
+      }
+      .phone {
+        width: 255px;
+        background: #111;
+        border-radius: 38px;
+        padding: 12px;
+        box-shadow:
+          0 40px 80px rgba(0, 0, 0, 0.45),
+          0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+      .phone-screen {
+        border-radius: 28px;
+        overflow: hidden;
+        aspect-ratio: 9/19;
+      }
+      .phone-screen video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+      }
+
+      /* QUEM BENEFICIA — destaque logo após hero */
+      .beneficiados {
+        background: var(--white);
+        padding: 96px 48px;
+      }
+      .beneficiados-header {
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto 64px;
+      }
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--teal-dark);
+        margin-bottom: 12px;
+      }
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(26px, 3vw, 40px);
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+      .section-sub {
+        font-size: 17px;
+        color: var(--ink-muted);
+        line-height: 1.7;
+      }
+      .perfis-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+      .perfil-card {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .perfil-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 36px rgba(77, 182, 172, 0.14);
+      }
+      .perfil-top {
+        padding: 32px 28px 24px;
+      }
+      .perfil-emoji {
+        font-size: 40px;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .perfil-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .perfil-name {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 12px;
+        line-height: 1.2;
+      }
+      .perfil-desc {
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.7;
+      }
+      .perfil-card.pessoa .perfil-top {
+        background: var(--teal-light);
+      }
+      .perfil-card.pessoa .perfil-label {
+        color: var(--teal-dark);
+      }
+      .perfil-card.org .perfil-top {
+        background: #fff8e7;
+      }
+      .perfil-card.org .perfil-label {
+        color: #a07820;
+      }
+      .perfil-card.idoso .perfil-top {
+        background: #f3effc;
+      }
+      .perfil-card.idoso .perfil-label {
+        color: #6b3fa0;
+      }
+      .perfil-bottom {
+        padding: 20px 28px;
+        background: var(--off-white);
+      }
+      .perfil-realidade {
+        font-size: 13px;
+        font-style: italic;
+        color: var(--ink-muted);
+        line-height: 1.6;
+      }
+      .perfil-realidade::before {
+        content: '"';
+      }
+      .perfil-realidade::after {
+        content: '"';
+      }
+
+      /* faixa urgência */
+      .urgencia {
+        background: var(--coral);
+        color: var(--white);
+        padding: 48px 48px;
+        text-align: center;
+      }
+      .urgencia p {
+        font-family: var(--font-display);
+        font-size: clamp(20px, 2.5vw, 30px);
+        font-style: italic;
+        line-height: 1.5;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .urgencia p strong {
+        font-style: normal;
+      }
+
+      /* COMO FUNCIONA */
+      .como {
+        background: var(--off-white);
+        padding: 96px 48px;
+      }
+      .como-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+      .como-right {
+        display: flex;
+        justify-content: center;
+      }
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .step {
+        display: flex;
+        gap: 20px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .step:last-child {
+        border-bottom: none;
+      }
+      .step-num {
+        font-family: var(--font-display);
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--teal);
+        min-width: 24px;
+        padding-top: 2px;
+      }
+      .step-body {
+      }
+      .step-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 6px;
+      }
+      .step-text {
+        font-size: 14px;
+        color: var(--ink-muted);
+        line-height: 1.65;
+      }
+      .step-quote {
+        font-size: 14px;
+        font-style: italic;
+        color: var(--teal-dark);
+        margin-top: 6px;
+      }
+
+      /* DADOS */
+      .dados {
+        background: var(--white);
+        padding: 96px 48px;
+      }
+      .dados-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        margin-top: 56px;
+        align-items: start;
+      }
+      .stats-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .stat-row {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .stat-row:last-child {
+        border-bottom: none;
+      }
+      .stat-big {
+        font-family: var(--font-display);
+        font-size: 42px;
+        font-weight: 700;
+        color: var(--teal);
+        line-height: 1;
+        min-width: 90px;
+      }
+      .stat-txt {
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.65;
+      }
+      .stat-txt strong {
+        color: var(--ink);
+      }
+      .paises {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .pais {
+        border-radius: 12px;
+        padding: 20px 24px;
+        border-left: 4px solid var(--teal);
+        background: var(--off-white);
+      }
+      .pais-nome {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--teal-dark);
+        margin-bottom: 6px;
+      }
+      .pais-txt {
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.6;
+      }
+
+      /* POR QUE PARCEIRO */
+      .porque {
+        background: var(--teal-deeper);
+        padding: 96px 48px;
+      }
+      .porque .eyebrow {
+        color: rgba(255, 255, 255, 0.5);
+      }
+      .porque .section-title {
+        color: var(--white);
+      }
+      .porque .section-sub {
+        color: rgba(255, 255, 255, 0.6);
+        max-width: 560px;
+      }
+      .beneficios {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 56px;
+      }
+      .beneficio {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 28px;
+        transition: background 0.2s;
+      }
+      .beneficio:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .beneficio-icon {
+        font-size: 28px;
+        margin-bottom: 14px;
+      }
+      .beneficio-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 8px;
+      }
+      .beneficio-text {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.58);
+        line-height: 1.65;
+      }
+
+      /* FORM */
+      .form-sec {
+        background: var(--off-white);
+        padding: 96px 48px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: start;
+      }
+      .form-left {
+        position: sticky;
+        top: 100px;
+      }
+      .form-left .section-title {
+        margin-bottom: 16px;
+      }
+      .form-appeal {
+        font-family: var(--font-display);
+        font-size: 18px;
+        font-style: italic;
+        color: var(--ink-soft);
+        line-height: 1.7;
+        margin-bottom: 32px;
+        border-left: 3px solid var(--teal);
+        padding-left: 20px;
+      }
+      .trust-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--ink-muted);
+      }
+      .trust-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--teal);
+        flex-shrink: 0;
+      }
+      .form-card {
+        background: var(--white);
+        border-radius: 20px;
+        padding: 40px;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 24px rgba(77, 182, 172, 0.08);
+      }
+      .form-card h3 {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 4px;
+      }
+      .form-card > p {
+        font-size: 14px;
+        color: var(--ink-muted);
+        margin-bottom: 28px;
+      }
+      .fg {
+        margin-bottom: 18px;
+      }
+      .fg label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-soft);
+        margin-bottom: 6px;
+      }
+      .fg input,
+      .fg select,
+      .fg textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: var(--font-body);
+        color: var(--ink);
+        background: var(--off-white);
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+        appearance: none;
+      }
+      .fg input:focus,
+      .fg select:focus,
+      .fg textarea:focus {
+        border-color: var(--teal);
+        box-shadow: 0 0 0 3px rgba(77, 182, 172, 0.15);
+        background: var(--white);
+      }
+      .fg textarea {
+        resize: vertical;
+        min-height: 90px;
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .form-btn {
+        width: 100%;
+        padding: 16px;
+        background: var(--teal);
+        color: var(--white);
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: var(--font-body);
+        cursor: pointer;
+        margin-top: 8px;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .form-btn:hover {
+        background: var(--teal-dark);
+        transform: translateY(-1px);
+      }
+      .form-note {
+        text-align: center;
+        font-size: 12px;
+        color: var(--ink-muted);
+        margin-top: 10px;
+      }
+      .success {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .success-icon {
+        font-size: 52px;
+        margin-bottom: 16px;
+      }
+      .success h4 {
+        font-family: var(--font-display);
+        font-size: 24px;
+        color: var(--teal-dark);
+        margin-bottom: 8px;
+      }
+      .success p {
+        font-size: 15px;
+        color: var(--ink-muted);
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--ink);
+        padding: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-display);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--teal);
+      }
+      .footer-logo img {
+        width: 32px;
+        height: 32px;
+        border-radius: 7px;
+      }
+      .footer-text {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        nav {
+          padding: 14px 24px;
+        }
+        .hero {
+          grid-template-columns: 1fr;
+          padding: 100px 24px 60px;
+          text-align: center;
+        }
+        .hero-sub {
+          margin: 0 auto 40px;
+        }
+        .hero-btns {
+          justify-content: center;
+        }
+        .hero-right {
+          margin-top: 48px;
+        }
+        .beneficiados,
+        .como,
+        .dados,
+        .porque,
+        .form-sec,
+        .urgencia,
+        footer {
+          padding: 64px 24px;
+        }
+        .perfis-grid {
+          grid-template-columns: 1fr;
+        }
+        .como-inner,
+        .dados-grid,
+        .form-sec {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .beneficios {
+          grid-template-columns: 1fr;
+        }
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .form-left {
+          position: static;
+        }
+        footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="nav-logo" href="#">
+        <img src="./image/remediar-logo.jpeg" alt="Remediar" />
+        Remediar
+      </a>
+      <a class="nav-cta" href="#parceria">Quero ser parceira</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">
+          <span></span>Aplicativo de doação de medicamentos<span></span>
+        </div>
+        <h1 class="hero-title">
+          O remédio que iam<br />vencer na prateleira<br />
+          <em>passa a salvar vida.</em>
+        </h1>
+        <p class="hero-sub">
+          O <strong>Remediar</strong> conecta quem tem medicamentos válidos
+          sobrando com pacientes de baixa renda, ONGs, orfanatos e asilos que
+          precisam — com triagem farmacêutica e rastreabilidade em cada etapa.
+        </p>
+        <div class="hero-btns">
+          <a class="btn-white" href="#parceria">Seja uma farmácia parceira</a>
+          <a class="btn-ghost" href="#como-funciona">Como funciona</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="phone-wrap">
+          <div class="phone-glow"></div>
+          <div class="phone">
+            <div class="phone-screen">
+              <video
+                src="./image/remediar.mp4"
+                alt="App Remediar — triagem farmacêutica"
+                autoplay
+                loop
+                muted
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUEM BENEFICIA -->
+    <section class="beneficiados">
+      <div class="beneficiados-header">
+        <div class="eyebrow">Quem o Remediar atende</div>
+        <h2 class="section-title">
+          Pessoas reais que interrompem tratamentos todo dia por falta de
+          acesso.
+        </h2>
+        <p class="section-sub">
+          O app foi construído para chegar a quem o sistema de saúde não alcança
+          — com segurança, dignidade e zero custo para quem recebe.
+        </p>
+      </div>
+      <div class="perfis-grid">
+        <div class="perfil-card pessoa">
+          <div class="perfil-top">
+            <span class="perfil-emoji">👩‍👧</span>
+            <div class="perfil-label">Paciente de baixa renda</div>
+            <div class="perfil-name">
+              Famílias que escolhem entre o remédio e a conta.
+            </div>
+            <p class="perfil-desc">
+              Pessoas com doenças crônicas que interrompem tratamentos
+              essenciais — pressão, diabetes, depressão — porque o orçamento não
+              fecha no final do mês.
+            </p>
+          </div>
+          <div class="perfil-bottom">
+            <div class="perfil-realidade">
+              Eu escolhi entre comprar o remédio ou pagar a conta de luz. Fiquei
+              três meses sem medicar a pressão.
+            </div>
+          </div>
+        </div>
+        <div class="perfil-card org">
+          <div class="perfil-top">
+            <span class="perfil-emoji">🏠</span>
+            <div class="perfil-label">ONGs, Orfanatos e Abrigos</div>
+            <div class="perfil-name">
+              Instituições que cuidam de muitos com orçamento para poucos.
+            </div>
+            <p class="perfil-desc">
+              Casas de acolhimento, abrigos municipais e ONGs que atendem
+              crianças, adultos em situação de rua e famílias vulneráveis — e
+              dependem de doações para garantir medicamentos básicos.
+            </p>
+          </div>
+          <div class="perfil-bottom">
+            <div class="perfil-realidade">
+              Atendemos 40 crianças. Quando falta antibiótico, a gente não tem
+              para onde correr.
+            </div>
+          </div>
+        </div>
+        <div class="perfil-card idoso">
+          <div class="perfil-top">
+            <span class="perfil-emoji">👴</span>
+            <div class="perfil-label">Asilos e Casas de Repouso</div>
+            <div class="perfil-name">
+              Idosos que dependem de medicação contínua sem acesso garantido.
+            </div>
+            <p class="perfil-desc">
+              Instituições de longa permanência para idosos que precisam de
+              medicamentos todos os dias — e que enfrentam rupturas de estoque
+              que colocam vidas em risco.
+            </p>
+          </div>
+          <div class="perfil-bottom">
+            <div class="perfil-realidade">
+              Tenho 12 idosos que tomam remédio de uso contínuo. Quando falta, a
+              situação é crítica.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="
+          background: var(--teal-light);
+          border-radius: 16px;
+          padding: 32px 40px;
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          max-width: 900px;
+          margin: 0 auto;
+        "
+      >
+        <div style="font-size: 36px; flex-shrink: 0">💊</div>
+        <div>
+          <div
+            style="
+              font-size: 15px;
+              font-weight: 700;
+              color: var(--teal-dark);
+              margin-bottom: 6px;
+            "
+          >
+            E tudo começa com uma farmácia parceira.
+          </div>
+          <p style="font-size: 14px; color: var(--ink-soft); line-height: 1.65">
+            Sem uma farmácia para validar, armazenar e dispensar com segurança —
+            os medicamentos doados não chegam a essas pessoas.
+            <strong style="color: var(--ink)"
+              >Você é o elo que faz o Remediar funcionar.</strong
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- URGÊNCIA -->
+    <div class="urgencia">
+      <p>
+        Essas duas histórias acontecem
+        <strong
+          >ao mesmo tempo, no mesmo bairro, às vezes no mesmo prédio.</strong
+        >
+        E nunca se encontram — até agora.
+      </p>
+    </div>
+
+    <!-- COMO FUNCIONA -->
+    <section class="como" id="como-funciona">
+      <div class="como-inner">
+        <div>
+          <div class="eyebrow">Como funciona</div>
+          <h2 class="section-title">
+            Simples para o doador.<br />Seguro para o paciente.<br />Estratégico
+            para você.
+          </h2>
+          <p class="section-sub" style="margin-bottom: 40px">
+            A farmácia parceira é o centro do fluxo — valida, armazena e
+            dispensa com a supervisão farmacêutica que a lei exige e as pessoas
+            merecem.
+          </p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">01</div>
+              <div class="step-body">
+                <div class="step-title">Doador cadastra o medicamento</div>
+                <div class="step-text">
+                  Você cadastra o remédio que deseja doar — nome, validade. Em
+                  segundos, ele entra na fila de triagem.
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">02</div>
+              <div class="step-body">
+                <div class="step-title">Farmacêutico aprova na triagem</div>
+                <div class="step-text">
+                  O farmacêutico parceiro analisa no app — verifica validade,
+                  integridade, necessidade de receita. Aprova ou reprova com
+                  rastreabilidade completa.
+                </div>
+                <div class="step-quote">
+                  Sua farmácia aparece no app como ponto de triagem e retirada.
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">03</div>
+              <div class="step-body">
+                <div class="step-title">
+                  Ela escolhe a farmácia mais próxima
+                </div>
+                <div class="step-text">
+                  O paciente ou a instituição localiza no mapa a farmácia
+                  parceira mais próxima da sua casa ou sede.
+                </div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">04</div>
+              <div class="step-body">
+                <div class="step-title">Retira o remédio sem custo nenhum</div>
+                <div class="step-text">
+                  O medicamento é entregue com segurança. Tudo em um mesmo app —
+                  documentado, rastreado, legal.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="como-right">
+          <!-- <div class="phone-wrap">
+            <div class="phone" style="width: 240px">
+              <div class="phone-screen">
+                <img
+                  src="WhatsApp_Image_2026-06-10_at_01_24_36.jpeg"
+                  alt="Triagem no app Remediar"
+                />
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- DADOS -->
+    <section class="dados">
+      <div class="eyebrow">Os números que justificam tudo</div>
+      <h2 class="section-title">
+        O problema é urgente.<br />A solução já existe.
+      </h2>
+      <div class="dados-grid">
+        <div class="stats-list">
+          <div class="stat-row">
+            <div class="stat-big">66–78%</div>
+            <div class="stat-txt">
+              <strong>dos brasileiros descartam medicamentos válidos</strong> no
+              lixo residencial — sem saber que poderiam ajudar alguém.
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-big">20%</div>
+            <div class="stat-txt">
+              <strong>vão direto para o esgoto</strong> — contaminando rios e
+              aquíferos que estações convencionais não conseguem tratar.
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-big">64%</div>
+            <div class="stat-txt">
+              <strong>de estoque não utilizado</strong> em áreas com alta
+              automedicação — resultado de tratamentos incompletos ou mudança de
+              prescrição.
+            </div>
+          </div>
+        </div>
+        <div class="paises">
+          <div
+            style="
+              font-size: 12px;
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.08em;
+              color: var(--ink-muted);
+              margin-bottom: 4px;
+            "
+          >
+            Contexto regional
+          </div>
+          <div class="pais">
+            <div class="pais-nome">🇨🇴 Colômbia</div>
+            <div class="pais-txt">
+              Pioneira com a Resolução nº 371 — obriga farmacêuticas a criar
+              programas nacionais de recolhimento de medicamentos vencidos ou
+              não utilizados.
+            </div>
+          </div>
+          <div class="pais">
+            <div class="pais-nome">🇧🇷 Brasil</div>
+            <div class="pais-txt">
+              Descarte pelo consumidor ainda negligenciado, mas estados avançam
+              com normas de logística reversa que exigem farmácias como pontos
+              de coleta.
+            </div>
+          </div>
+          <div class="pais">
+            <div class="pais-nome">🇨🇱 Chile e região</div>
+            <div class="pais-txt">
+              Mais de 96% da população desconhece pontos de coleta designados —
+              dependendo quase só de campanhas municipais isoladas.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUE SER PARCEIRO -->
+    <section class="porque">
+      <div class="eyebrow">Por que ser parceira</div>
+      <h2 class="section-title">
+        Mais do que ponto de coleta.<br />Uma posição de liderança em saúde.
+      </h2>
+      <p class="section-sub">
+        Farmácias parceiras ganham visibilidade, dados e impacto social real —
+        com suporte e segurança jurídica em cada etapa.
+      </p>
+      <div class="beneficios">
+        <div class="beneficio">
+          <div class="beneficio-icon">📍</div>
+          <div class="beneficio-title">Visibilidade no mapa</div>
+          <div class="beneficio-text">
+            Sua farmácia aparece para pacientes e instituições próximas que
+            buscam pontos de retirada. Novos pacientes chegam por você.
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">📊</div>
+          <div class="beneficio-title">Dados de saúde local</div>
+          <div class="beneficio-text">
+            Acesso a dados sobre demanda de medicamentos na sua região —
+            informação que nenhuma outra plataforma oferece.
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">⚖️</div>
+          <div class="beneficio-title">Conformidade legal</div>
+          <div class="beneficio-text">
+            Operação alinhada à legislação de logística reversa. CRF registrado
+            como proteção legal para o farmacêutico responsável.
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">📱</div>
+          <div class="beneficio-title">App de triagem exclusivo</div>
+          <div class="beneficio-text">
+            Painel dedicado para farmacêuticos: aprovação, estoque,
+            rastreabilidade. Tudo em um mesmo lugar, sem burocracia extra.
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">🏆</div>
+          <div class="beneficio-title">Selo Remediar</div>
+          <div class="beneficio-text">
+            Reconhecimento público como farmácia parceira — diferencial real na
+            sua comunidade e comunicação de impacto social.
+          </div>
+        </div>
+        <div class="beneficio">
+          <div class="beneficio-icon">💚</div>
+          <div class="beneficio-title">Sem custo na fase piloto</div>
+          <div class="beneficio-text">
+            Durante o piloto, a parceria é gratuita para a farmácia. Você entra
+            agora e ajuda a moldar como o projeto cresce.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="form-sec" id="parceria">
+      <div class="form-left">
+        <div class="eyebrow">Seja parceira</div>
+        <h2 class="section-title">
+          Sua farmácia pode ser o lugar onde o remédio esquecido começa a salvar
+          vidas.
+        </h2>
+        <p class="form-appeal">
+          Sem uma farmácia parceira, os medicamentos doados não chegam a quem
+          precisa. Você é o que falta para o Remediar acontecer.
+        </p>
+        <div class="trust-list">
+          <div class="trust-item">
+            <div class="trust-dot"></div>
+            Triagem farmacêutica em cada doação
+          </div>
+          <div class="trust-item">
+            <div class="trust-dot"></div>
+            Rastreabilidade completa no app
+          </div>
+          <div class="trust-item">
+            <div class="trust-dot"></div>
+            Conformidade com legislação vigente
+          </div>
+          <div class="trust-item">
+            <div class="trust-dot"></div>
+            Suporte dedicado para farmácias parceiras
+          </div>
+          <div class="trust-item">
+            <div class="trust-dot"></div>
+            Sem custo para a farmácia na fase piloto
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form-card">
+          <h3>Cadastro de Farmácia Parceira</h3>
+          <p>Preencha e entraremos em contato em até 48 horas.</p>
+          <form
+            id="partnerForm"
+            action="https://formsubmit.co/mayzamrodrigues@gmail.com"
+            method="POST"
+          >
+            <!-- Evita captcha -->
+            <input type="hidden" name="_captcha" value="false" />
+
+            <!-- Redirecionamento após envio (opcional) -->
+            <input
+              type="hidden"
+              name="_next"
+              value="https://seusite.com/obrigado.html"
+            />
+
+            <div class="fg">
+              <label>Nome da farmácia *</label>
+              <input
+                type="text"
+                name="farmacia"
+                placeholder="Ex: Farmácia Central"
+                required
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="fg">
+                <label>Nome do responsável *</label>
+                <input
+                  type="text"
+                  name="responsavel"
+                  placeholder="Seu nome completo"
+                  required
+                />
+              </div>
+
+              <div class="fg">
+                <label>CRF do farmacêutico *</label>
+                <input type="text" name="crf" placeholder="Ex: CRF-SP 12345" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="fg">
+                <label>E-mail *</label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="contato@farmacia.com"
+                  required
+                />
+              </div>
+
+              <div class="fg">
+                <label>WhatsApp *</label>
+                <input
+                  type="tel"
+                  name="whatsapp"
+                  placeholder="(11) 99999-9999"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="fg">
+                <label>Cidade *</label>
+                <input
+                  type="text"
+                  name="cidade"
+                  placeholder="Sua cidade"
+                  required
+                />
+              </div>
+
+              <div class="fg">
+                <label>Estado *</label>
+                <select name="estado" required>
+                  <option value="">Selecione</option>
+                  <option>AC</option>
+                  <option>AL</option>
+                  <option>AP</option>
+                  <option>AM</option>
+                  <option>BA</option>
+                  <option>CE</option>
+                  <option>DF</option>
+                  <option>ES</option>
+                  <option>GO</option>
+                  <option>MA</option>
+                  <option>MT</option>
+                  <option>MS</option>
+                  <option>MG</option>
+                  <option>PA</option>
+                  <option>PB</option>
+                  <option>PR</option>
+                  <option>PE</option>
+                  <option>PI</option>
+                  <option>RJ</option>
+                  <option>RN</option>
+                  <option>RS</option>
+                  <option>RO</option>
+                  <option>RR</option>
+                  <option>SC</option>
+                  <option>SP</option>
+                  <option>SE</option>
+                  <option>TO</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="fg">
+              <label>Tipo de farmácia</label>
+              <select name="tipo_farmacia">
+                <option>Farmácia independente</option>
+                <option>Rede de farmácias</option>
+                <option>Farmácia comunitária / UBS</option>
+                <option>Farmácia hospitalar</option>
+                <option>Outro</option>
+              </select>
+            </div>
+
+            <div class="fg">
+              <label>O que te motivou? (opcional)</label>
+              <textarea
+                name="motivacao"
+                placeholder="Conte um pouco sobre sua farmácia e por que quer fazer parte..."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="form-btn">
+              Quero ser farmácia parceira →
+            </button>
+
+            <p class="form-note">
+              Seus dados são usados apenas para contato sobre a parceria.
+            </p>
+          </form>
+          <div class="success" id="successMsg">
+            <div class="success-icon">💊</div>
+            <h4>Cadastro recebido!</h4>
+            <p>
+              Entraremos em contato em até 48 horas.<br />Obrigada por querer
+              fazer parte do Remediar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">
+        <img src="./image/remediar-logo.jpeg" alt="Remediar" />
+        Remediar
+      </div>
+      <div class="footer-text">
+        Transforme o que sobra em saúde para quem precisa.
+      </div>
+    </footer>
+
+    <script>
+      document
+        .getElementById("partnerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          this.style.display = "none";
+          document.getElementById("successMsg").style.display = "block";
+        });
+    </script>
+  </body>
+</html>
