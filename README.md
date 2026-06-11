@@ -1,6 +1,8 @@
 # 💊 REMEDIAR
 ### Doação Inteligente de Medicamentos
 *Documentação completa do projeto · Clube da programacao · Laura Debugras · Junho 2026*
+www.remediar.org
+
 
 ---
 
